@@ -1,0 +1,45 @@
+services:
+  client:
+    build: ./cliente
+    image: image_client
+    container_name: master
+    stdin_open: true
+    tty: true
+    restart: always
+
+    networks:
+      cdn_bridge_network:
+        ipv4_address: 172.18.0.1
+
+  bots:
+    image: flemingcsi/telnet-server
+    container_name: bots
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      cdn_bridge_network:
+        ipv4_address: 172.18.0.22
+
+  database:
+    image: mariadb:10.3
+    container_name: database
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=mirai
+      - MARIADB_AUTO_UPGRADE="yes"
+    volumes:
+       - ./db:/docker-entrypoint-initdb.d
+    networks:
+       cdn_bridge_network:
+         ipv4_address: 172.18.0.51
+networks:
+  cdn_bridge_network:
+    name: cdn_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/24
+          gateway: 172.18.0.1
