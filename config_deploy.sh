@@ -9,4 +9,7 @@ docker-compose up -d
 sleep 5
 
 # Aprovisionamiento de los containers
+sleep 5
 
+# Aprovisionamiento de los containers
+ansible-playbook aprovisionamiento.yml

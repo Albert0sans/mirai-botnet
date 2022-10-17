@@ -1,0 +1,14 @@
+[all:vars]
+ansible_connection=ssh
+ansible_user=RdDC
+ansible_password=proyecto
+ansible_ssh_pass=proyecto
+ansible_ssh_common_args="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+
+[master]
+172.18.0.1
+ 
+[bots]
+172.18.0.22
+
