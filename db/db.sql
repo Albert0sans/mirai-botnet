@@ -1,5 +1,7 @@
+DROP DATABASE IF EXISTS mirai;
 CREATE DATABASE mirai;
-
+grant all on mirai.* to root@localhost identified by "root";
+flush privileges;
 USE mirai;
 
 CREATE TABLE `history` (
@@ -38,5 +40,3 @@ CREATE TABLE `whitelist` (
 );
 
 INSERT INTO users VALUES (NULL, 'root', 'root', 0, 0, 0, 0, -1, 1, 30, '');
-
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';

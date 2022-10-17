@@ -23,5 +23,6 @@ RUN service ssh start
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 EXPOSE 22
+EXPOSE 80
 CMD ["/usr/sbin/sshd","-D"]
 

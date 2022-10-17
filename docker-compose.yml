@@ -10,9 +10,8 @@ services:
     networks:
       cdn_bridge_network:
         ipv4_address: 172.18.0.1
-
   bots:
-    image: flemingcsi/telnet-server
+    build: ./botnet
     container_name: bots
     stdin_open: true
     tty: true
